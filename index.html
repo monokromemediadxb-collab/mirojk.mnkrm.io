@@ -1,30 +1,27 @@
-<!-- Test commit-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Monokrome Media | Where Vision Comes Alive</title>
+  <title>Where Vision Comes Alive | Monokrome Media</title>
   <link rel="icon" href="images/logo-black.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900&family=Space+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
-  <a class="brand" href="#hero" aria-label="Monokrome Media home">
-    <img src="images/logo-white.png" alt="Monokrome Media">
-  </a>
+<body class="home">
+  <a class="brand" href="index.html" aria-label="Monokrome Media home"><img src="images/logo-white.png" alt="Monokrome Media"></a>
   <nav>
-    <a href="#work">Our Work</a>
-    <a href="#break">Who We Are</a>
-    <a href="#what">What We Do</a>
-    <a href="#contact">Contact</a>
+    <a href="work.html">Our Work</a>
+    <a href="about.html">Who We Are</a>
+    <a href="services.html">What We Do</a>
+    <a href="contact.html">Contact</a>
   </nav>
 
   <main>
     <section id="hero">
-      <!-- <video autoplay muted loop playsinline src="images/landing.mp4"></video> -->
+      <div class="ph ph--fill" style="position:absolute;inset:0;opacity:.35;z-index:-1"><span>Placeholder 6</span></div>
+      <!-- <video autoplay muted loop playsinline src="images/showreel.mp4"></video> -->
       <div class="tag">Monokrome. Where vision comes alive</div>
     </section>
 
@@ -33,7 +30,7 @@
       <h1 class="w w-verb display" id="verb">BREAK</h1>
       <div class="copy">
         This paragraph answers the question: what can you do for me? And why you? Sample text: We create high-end media for brands that want to communicate successfully across audiences and platforms, whilst feeling like themselves. We go from organic phone photography to vfx to create new possibilities for your imagination.
-        <br><a class="btn" href="#contact">Start a project</a>
+        <br><a class="btn" href="contact.html">Start a project</a>
       </div>
       <h1 class="w w-the display">THE</h1>
       <h1 class="w w-noun display" id="noun">LIMITS</h1>
@@ -44,42 +41,65 @@
     <section id="work">
       <div class="dim" id="dim"></div>
       <div class="display title"><span>Get</span><span>A</span><span>Taste</span></div>
-      <div class="track" id="track"></div>
+      <div class="track" id="track">
+      <a class="card" href="project.html?p=Meydan+World+Cup"><div class="img"><div class="ph " style=""><span>Placeholder 1</span></div></div>Meydan World Cup</a>
+      <a class="card" href="project.html?p=Maison+Margiela+S/S"><div class="img"><div class="ph " style=""><span>Placeholder 2</span></div></div>Maison Margiela S/S</a>
+      <a class="card" href="project.html?p=Soho+House+Dubai"><div class="img"><div class="ph " style=""><span>Placeholder 3</span></div></div>Soho House Dubai</a>
+      <a class="card" href="project.html?p=District+09"><div class="img"><div class="ph " style=""><span>Placeholder 4</span></div></div>District 09</a>
+      <a class="card" href="project.html?p=Amwaj+Resorts"><div class="img"><div class="ph " style=""><span>Placeholder 5</span></div></div>Amwaj Resorts</a>
+      </div>
       <div class="display title title--bottom"><span>Of</span><span class="coral">Monokrome</span></div>
-      <a class="btn btn--light" href="#">Browse our work</a>
+      <a class="btn btn--light" href="work.html">Browse our work</a>
     </section>
 
-    <section id="clients">
-      <span>amazon</span>
-      <span style="font-family:cursive;font-weight:400">Canva</span>
-      <span>Restaurant Steak House</span>
+    <section id="clients"><div class="ph ph--logo" style=""><span>Placeholder 7</span></div><div class="ph ph--logo" style=""><span>Placeholder 8</span></div><div class="ph ph--logo" style=""><span>Placeholder 9</span></div><div class="ph ph--logo" style=""><span>Placeholder 10</span></div></section>
+
+    <section id="quotes">
+      <h2 class="display" data-reveal="up">Kind words</h2>
+      <div class="quote-grid">
+      <figure class="quote" data-reveal="up" style="--d:0.0s">
+        <div class="ph ph--avatar" style=""><span>Placeholder 11</span></div>
+        <blockquote>“Testimonial placeholder: a short line from a client about working with Monokrome.”</blockquote>
+        <figcaption>Client name, Brand</figcaption>
+      </figure>
+      <figure class="quote" data-reveal="up" style="--d:0.12s">
+        <div class="ph ph--avatar" style=""><span>Placeholder 12</span></div>
+        <blockquote>“Testimonial placeholder: a short line from a client about working with Monokrome.”</blockquote>
+        <figcaption>Client name, Brand</figcaption>
+      </figure>
+      <figure class="quote" data-reveal="up" style="--d:0.24s">
+        <div class="ph ph--avatar" style=""><span>Placeholder 13</span></div>
+        <blockquote>“Testimonial placeholder: a short line from a client about working with Monokrome.”</blockquote>
+        <figcaption>Client name, Brand</figcaption>
+      </figure>
+      </div>
     </section>
 
     <section id="what">
       <h2 class="display">What can we do</h2>
       <div class="circles">
-        <a class="circle circle--light" href="#">Explore our services</a>
-        <a class="circle circle--dark" href="#contact">Talk to us</a>
+        <a class="circle circle--light" href="services.html">Explore our services</a>
+        <a class="circle circle--dark" href="contact.html">Talk to us</a>
       </div>
       <h2 class="display">For you?</h2>
     </section>
   </main>
 
-  <footer id="contact">
+  <footer id="contact-footer">
     <div class="logo"><img src="images/logo-white.png" alt="Monokrome Media"></div>
     <ul>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Projects</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="work.html">Projects</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
-    <ul><li>Corporate</li><li>Events</li><li>Social Media</li><li>Commercials</li></ul>
-    <ul><li>Handheld Media</li><li>Aerial Media</li><li>Mobile Media</li><li>VFX &amp; CGI</li></ul>
-    <div>IG · FB · IN<br><br>hello@monokrome.com<br>+971 00 000 0000</div>
+    <ul><li>Commercial &amp; Brand Films</li><li>Photography</li><li>Event Coverage</li><li>Social Content</li></ul>
+    <ul><li>Drone &amp; Aerial</li><li>Post-Production</li><li>Dubai, UAE</li><li>hello@monokrome.com</li></ul>
+    <div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">IN</a></div>
     <div class="small">Privacy Policy · © 2026 Monokrome. All Rights Reserved.</div>
   </footer>
-
   <div class="scroll-btn" id="scrollBtn" aria-hidden="true">Scroll<br>down</div>
-  <script src="js/main.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>
