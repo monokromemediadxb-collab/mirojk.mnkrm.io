@@ -1,6 +1,8 @@
-// Fills the project title from ?p=Project+Name
-const p = new URLSearchParams(location.search).get('p');
-if (p) {
-  document.getElementById('ptitle').textContent = p;
-  document.title = p + ' | Monokrome Media';
+/* ==========================================================================
+   PROJECT PAGE - fills the title from the link, e.g. project.html?p=Soho+House
+   ========================================================================== */
+const projectName = new URLSearchParams(location.search).get('p');
+if (projectName) {
+  document.getElementById('ptitle').textContent = projectName;
+  document.title = projectName + ' | Monokrome Media';
 }

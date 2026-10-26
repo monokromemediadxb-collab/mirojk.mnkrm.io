@@ -1,5 +1,15 @@
-// Scroll-reveal animations (elements with data-reveal)
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+/* ==========================================================================
+   COMMON - runs on every page
+   Scroll-reveal: any element with data-reveal="left|right|up" animates in
+   when it enters the screen (styles live in css/style.css, section 6).
+   ========================================================================== */
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    }
+  });
 }, { threshold: 0.15 });
-document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));

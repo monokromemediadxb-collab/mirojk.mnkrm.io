@@ -1,15 +1,26 @@
-// Filter buttons + load more
-const cards = [...document.querySelectorAll('.card--work')];
+/* ==========================================================================
+   WORK PAGE - category filters + "Load more"
+   Each card has data-cat="Film | Photography | Social | VFX | Aerial".
+   A link like work.html?f=Aerial opens the page pre-filtered.
+   ========================================================================== */
+const cards   = [...document.querySelectorAll('.card--work')];
 const buttons = [...document.querySelectorAll('#filters .pill')];
-const more = document.getElementById('loadMore');
+const loadMore = document.getElementById('loadMore');
 
-function applyFilter(cat) {
-  buttons.forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
-  cards.forEach(c => c.classList.toggle('filtered-out', cat !== 'All' && c.dataset.cat !== cat));
-  if (cat !== 'All') cards.forEach(c => c.classList.remove('hidden-card'));
+function applyFilter(category) {
+  buttons.forEach(b => b.classList.toggle('active', b.dataset.filter === category));
+  cards.forEach(card =>
+    card.classList.toggle('filtered-out', category !== 'All' && card.dataset.cat !== category));
+
+  if (category !== 'All') cards.forEach(card => card.classList.remove('hidden-card'));
 }
+
 buttons.forEach(b => b.addEventListener('click', () => applyFilter(b.dataset.filter)));
-more.addEventListener('click', () => { cards.forEach(c => c.classList.remove('hidden-card')); more.style.display = 'none'; });
+
+loadMore.addEventListener('click', () => {
+  cards.forEach(card => card.classList.remove('hidden-card'));
+  loadMore.style.display = 'none';
+});
 
 const preset = new URLSearchParams(location.search).get('f');
 if (preset) applyFilter(preset);

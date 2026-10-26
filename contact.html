@@ -1,119 +1,91 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Start a Project | Monokrome Media</title><link rel="icon" href="images/logo-black.png">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900&family=Space+Mono&display=swap" rel="stylesheet">
-<style>
-:root{--crimson:#79192D;--cherry:#961f2a;--ivory:#F2F1ED;--taupe:#E5DED6;--coral:#EC4055;--slate:#323131;--black:#1B1A1A;--mauve:#665555}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Space Mono',monospace;background:var(--black);color:#fff;line-height:1.6;overflow-x:hidden}
-img{max-width:100%;display:block}a{color:inherit}
-h1,h2,.display{font-family:'Archivo','Arial Black',sans-serif;font-stretch:125%;font-weight:900;text-transform:uppercase;line-height:1.05}
-.coral{color:var(--coral)}.cream{color:var(--taupe)}
-.ph{position:relative;display:grid;place-items:center;width:100%;height:100%;min-height:50px;background:repeating-linear-gradient(135deg,#3b3636 0 12px,#433d3d 12px 24px);color:#d9d2cc;font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-align:center;border:1px dashed #ffffff44}
-.ph--fill{position:absolute;inset:0}
-.ph--logo{width:120px;height:44px;flex:none;font-size:9px;background:#d4cbc2;color:#665555;border:1px dashed #66555566}
-.play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:#0008}
-.play::after{content:'';position:absolute;left:25px;top:18px;border-left:20px solid #fff;border-top:14px solid transparent;border-bottom:14px solid transparent}
-.brand{position:fixed;top:18px;left:30px;z-index:50}.brand img{height:64px;width:auto}
-body.light .brand img,body.taupe .brand img{filter:invert(1)}
-nav{position:fixed;top:20px;right:30px;z-index:50;display:flex;align-items:center;gap:14px;padding:10px 18px;background:var(--taupe);border-radius:40px}
-nav a{color:var(--black);text-decoration:none;font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding:5px 10px;border-radius:20px;transition:color .2s}
-nav a:hover{color:var(--coral)}nav a.active{background:var(--coral);color:#fff}
-.btn{display:inline-block;margin-top:24px;padding:8px 18px;background:var(--coral);color:#fff;border:0;border-radius:20px;font:inherit;font-size:11px;text-transform:uppercase;text-decoration:none;cursor:pointer}
-.btn--light{background:var(--ivory);color:var(--crimson)}
-.link{background:none;border:0;color:inherit;font:inherit;text-decoration:underline;text-transform:uppercase;cursor:pointer}
-.pill{padding:8px 26px;border:0;border-radius:20px;background:var(--ivory);color:var(--black);font:inherit;font-size:11px;text-transform:uppercase;cursor:pointer}
-.pill.active,.pill:hover{background:var(--coral);color:#fff}
-[data-reveal]{opacity:0;transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .9s;transition-delay:var(--d,0s)}
-[data-reveal=left]{transform:translateX(-12vw)}[data-reveal=right]{transform:translateX(12vw)}[data-reveal=up]{transform:translateY(70px)}
-[data-reveal].in{opacity:1;transform:none}
-footer{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr auto;gap:30px;padding:50px 6vw 20px;background:var(--mauve);font-size:11px;color:#fff}
-footer .logo img{height:70px;width:auto}
-footer ul{list-style:none;line-height:2;text-transform:uppercase;opacity:.85}footer a{text-decoration:none}
-.social{display:flex;gap:14px;font-size:14px}.small{grid-column:1/-1;margin-top:30px;text-align:right;font-size:10px;opacity:.6}
-#hero{position:sticky;top:0;z-index:0;height:100vh;overflow:hidden;cursor:pointer;background:radial-gradient(circle at 70% 60%,#d98a4a55,transparent 25%),radial-gradient(circle at 30% 55%,#ec405555,transparent 30%),linear-gradient(#0b0d12,#1a1d26 60%,#050505)}
-#hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-#hero .tag{position:absolute;bottom:40px;left:30px;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
-.scroll-btn{position:fixed;top:0;left:0;z-index:40;display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:#961f2a99;border:1px solid var(--coral);backdrop-filter:blur(4px);color:#fff;font-size:10px;line-height:1.3;text-align:center;text-transform:uppercase;letter-spacing:.1em;pointer-events:none;opacity:0;transition:opacity .3s;will-change:transform}
-.scroll-btn.visible{opacity:1}@media(hover:none){.scroll-btn{display:none}}
-#break{position:relative;z-index:2;min-height:100vh;padding:12vh 6vw;background:var(--cherry);box-shadow:0 -30px 60px #0008;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,auto);gap:3vh 0}
-#break .w{font-size:clamp(28px,4.2vw,60px);cursor:pointer;user-select:none;transition:opacity .35s,color .2s}#break .w.locked{color:var(--coral)}
-.w-we{grid-area:1/1}.w-verb{grid-area:2/2;justify-self:end}.w-the{grid-area:3/2;justify-self:end}.w-noun{grid-area:4/2;justify-self:end}.w-of{grid-area:5/1}.w-poss{grid-area:5/2;justify-self:end}
-.copy{grid-area:3/1/5/2;align-self:center;max-width:420px;font-size:12px;line-height:1.7}
-#work{position:relative;z-index:2;overflow:hidden;padding:14vh 4vw;background:var(--black);text-align:center}
-#work .title{display:flex;justify-content:space-between;padding:0 1vw;margin-bottom:5vh;font-size:clamp(18px,2.2vw,30px);opacity:0;transition:opacity 1.2s}#work .title.in{opacity:1}#work .title--bottom{margin:5vh 0}
-.dim{position:absolute;inset:0;z-index:5;background:#000;opacity:0;pointer-events:none}
-.track{display:flex;justify-content:center;gap:1.2vw;perspective:1200px;transition:transform .15s}
-.card{display:block;width:17vw;min-width:130px;padding:10px 10px 8px;background:var(--ivory);color:var(--black);font-size:10px;text-decoration:none;transition:transform .3s}
-.card:hover{transform:translateY(-8px)}.card .img{position:relative;aspect-ratio:3/4;margin-bottom:10px}
-#clients{position:relative;z-index:2;display:flex;align-items:center;gap:60px;padding:40px 6vw;background:var(--taupe)}
-#what{position:relative;z-index:2;min-height:100vh;padding:14vh 4vw;background:var(--ivory);color:var(--mauve);text-align:center}
-#what h2{font-size:clamp(28px,4.5vw,64px)}.circles{display:flex;justify-content:center;gap:6vw;margin:6vh 0}
-.circle{display:grid;place-items:center;width:min(18vw,200px);height:min(18vw,200px);min-width:130px;min-height:130px;border-radius:50%;font-size:11px;text-transform:uppercase;text-decoration:none;animation:float 5s ease-in-out infinite}
-.circle--light{background:var(--taupe);color:var(--slate)}.circle--dark{background:var(--cherry);color:#fff;animation-duration:6s;animation-delay:-2.5s}
-@keyframes float{50%{transform:translateY(-22px)}}
-.page{padding:150px 5vw 80px;min-height:100vh}
-.page-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:20px 4vw;margin-bottom:50px}
-.page-head h1{font-size:clamp(34px,6vw,88px)}.page-head p{max-width:520px;font-size:13px;padding-bottom:8px}
-body.light{background:var(--ivory);color:var(--black)}body.taupe{background:var(--taupe);color:var(--slate)}
-.filters{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:60px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 3vw}
-.card--work{width:auto}.card small{display:block;opacity:.55}
-.hidden-card,.card--work.filtered-out{display:none}.more{text-align:center;margin-top:70px}
-.svc{display:grid;grid-template-columns:minmax(280px,1fr) 2fr;gap:24px;margin-top:20px}
-.svc-list{list-style:none;display:flex;flex-direction:column;gap:20px;padding:36px 30px;background:var(--cherry);min-height:540px;transition:background .4s}
-.svc-item{background:none;border:0;color:#fff;font-family:'Archivo',sans-serif;font-stretch:125%;font-weight:800;font-size:clamp(16px,1.8vw,26px);text-transform:uppercase;text-align:left;cursor:pointer;transition:color .25s,transform .25s}
-.svc-item:hover,.svc-item.active{color:var(--coral);transform:translateX(8px)}
-.svc-stage{position:relative;min-height:540px;color:#fff;transition:background .4s;background:var(--cherry)}
-.svc-stage[data-c="0"],.svc-list[data-c="0"]{background:var(--coral)}.svc-stage[data-c="1"],.svc-list[data-c="1"]{background:var(--cherry)}.svc-stage[data-c="2"],.svc-list[data-c="2"]{background:var(--crimson)}.svc-stage[data-c="3"],.svc-list[data-c="3"]{background:var(--slate)}
-.svc-list[data-c="0"] .svc-item.active,.svc-list[data-c="0"] .svc-item:hover{color:var(--crimson)}
-.svc-img{position:absolute;inset:0;opacity:0;transition:opacity .4s}.svc-stage[data-c="2"] .svc-img{opacity:1}
-.svc-panel{position:absolute;right:30px;bottom:30px;max-width:480px;opacity:0;pointer-events:none;transition:opacity .35s;font-size:12px;line-height:1.7;z-index:2}
-.svc-panel.show{opacity:1;pointer-events:auto}.svc-panel h3{margin-bottom:8px;font-size:13px}.svc-panel a{text-decoration:underline}
-.about-hero{position:relative;padding:150px 4vw 110px;min-height:100vh;background:var(--cherry);overflow:hidden}
-.headline{position:relative;z-index:3;font-size:clamp(34px,7vw,100px);color:var(--coral)}.headline .line{display:block}.headline .line--r{text-align:right}
-.about-media{position:relative;z-index:1;width:62%;margin:-2.2vw 0 0 auto;aspect-ratio:16/9}
-.about-copy{position:absolute;z-index:2;left:4vw;top:52%;max-width:380px;font-size:11px;line-height:1.7}.about-copy p{margin-bottom:14px}
-.partners{background:var(--taupe);padding:40px 0;overflow:hidden}
-.big{font-size:clamp(60px,14vw,210px);color:var(--ivory);text-align:center;line-height:.95}
-.marquee{overflow:hidden;margin:14px 0}.row{display:flex;gap:50px;width:max-content;animation:scroll 30s linear infinite}.marquee--rev .row{animation-direction:reverse}
-@keyframes scroll{to{transform:translateX(-50%)}}
-.bespoke{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:24px 4vw;padding:100px 6vw;background:var(--crimson);align-items:start}
-.b-left{grid-column:1;aspect-ratio:16/9;width:70%;position:relative}.b-right{grid-column:2;grid-row:1/5;aspect-ratio:4/3;position:relative}
-.bespoke h2{grid-column:1;font-size:clamp(22px,2.6vw,38px);position:relative;z-index:2;margin-right:-9vw}
-.bespoke p{grid-column:1;font-size:12px;max-width:460px}.bespoke .btn{justify-self:start;grid-column:1}
-.ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin:30px 0 50px}
-.way{background:var(--ivory);padding:20px;color:var(--black);font-size:12px;text-decoration:none;transition:transform .3s}.way:hover{transform:translateY(-8px)}.way b{display:block;font-family:'Archivo',sans-serif;font-stretch:125%;text-transform:uppercase;margin-bottom:6px}
-.brief{display:grid;gap:18px;max-width:640px}.brief h2{font-size:22px}.brief label{display:grid;gap:6px;font-size:11px;text-transform:uppercase}
-.brief input,.brief select,.brief textarea{padding:12px;border:1px solid #66555588;background:var(--ivory);font:inherit;font-size:13px;color:var(--black)}.brief .btn{justify-self:start}
-.p-hero{position:relative;aspect-ratio:16/7}.grid--3{grid-template-columns:repeat(3,1fr);margin-top:30px}.grid--3>.ph{aspect-ratio:4/3}
-@media(max-width:800px){nav{gap:4px;padding:8px 10px;top:14px;right:10px}nav a{padding:4px 6px;font-size:9px}.brand{left:14px;top:14px}.brand img{height:40px}
-.track{overflow-x:auto;justify-content:flex-start}#clients{flex-wrap:wrap}footer{grid-template-columns:1fr 1fr}.grid{grid-template-columns:repeat(2,1fr)}
-.svc,.bespoke{grid-template-columns:1fr}.about-media{width:100%;margin-top:20px}.about-copy{position:static;margin-top:24px}.b-left,.b-right{grid-column:1;grid-row:auto;width:100%}.bespoke h2{margin-right:0}.grid--3{grid-template-columns:1fr}}
-</style></head>
-<body class="taupe">
-<a class="brand" href="index.html"><img src="images/logo-white.png" alt="Monokrome Media"></a>
-<nav><a href="work.html">Our Work</a><a href="about.html">Who We Are</a><a href="services.html">What We Do</a><a href="contact.html" class=active>Contact</a></nav>
-<main class="page"><header class="page-head"><h1 class="display" style="color:var(--mauve)">Let’s get to know<br>each other</h1></header>
-<p>Contact us with</p>
-<div class="ways"><a class="way" href="https://wa.me/971000000000"><b>WhatsApp</b>+971 00 000 0000</a><a class="way" href="mailto:hello@monokrome.com"><b>Email</b>hello@monokrome.com</a><div class="way"><b>Location</b>Dubai, UAE. Shoots across all seven emirates.</div></div>
-<form id="brief" class="brief"><h2 class="display">Short project brief</h2>
-<label>Name<input name="name" required></label><label>Email<input type="email" name="email" required></label><label>Phone / WhatsApp<input name="phone"></label>
-<label>Service<select name="service"><option>Event Media</option><option>Social Content</option><option>Corporate Media</option><option>Commercial Production</option></select></label><label>Tell us about your project<textarea name="brief" rows="5" required></textarea></label>
-<button class="btn" type="submit">Send enquiry</button></form></main>
-<footer><div class="logo"><img src="images/logo-white.png" alt="Monokrome Media"></div>
-<ul><li><a href="about.html">About Us</a></li><li><a href="work.html">Projects</a></li><li><a href="services.html">Services</a></li><li><a href="contact.html">Contact</a></li></ul>
-<ul><li>Corporate</li><li>Events</li><li>Social Media</li><li>Commercials</li></ul>
-<ul><li>Handheld Media</li><li>Aerial Media</li><li>Mobile Media</li><li>VFX &amp; CGI</li></ul>
-<div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">IN</a></div>
-<div class="small">Privacy Policy · © 2026 Monokrome. All Rights Reserved.</div></footer>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start a Project | Monokrome Media</title>
+  <link rel="icon" href="images/logo-black.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
 
-<script>
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
-document.getElementById('brief').addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.target);
-const body=`Name: ${f.get('name')}\nEmail: ${f.get('email')}\nPhone: ${f.get('phone')}\nService: ${f.get('service')}\n\n${f.get('brief')}`;
-location.href=`mailto:hello@monokrome.com?subject=${encodeURIComponent('Project enquiry: '+f.get('service'))}&body=${encodeURIComponent(body)}`});
-</script>
-</body></html>
+<body class="taupe">
+
+  <!-- ===== HEADER ===== -->
+  <a class="brand" href="index.html" aria-label="Monokrome Media home">
+    <img src="images/logo-white.png" alt="Monokrome Media">
+  </a>
+  <nav>
+    <a href="work.html">Our Work</a>
+    <a href="about.html">Who We Are</a>
+    <a href="services.html">What We Do</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+
+  <!-- ===== PAGE CONTENT ===== -->
+  <main class="page">
+
+    <!-- ---------- HEADING ---------- -->
+    <header class="page-head">
+      <h1 class="display" style="color: var(--mauve)">Let’s get to know<br>each other</h1>
+    </header>
+
+    <!-- ---------- WAYS TO REACH US (replace the fake number and email) ---------- -->
+    <p>Contact us with</p>
+    <div class="ways">
+      <a class="way" href="https://wa.me/971000000000"><b>WhatsApp</b>+971 00 000 0000</a>
+      <a class="way" href="mailto:hello@monokrome.com"><b>Email</b>hello@monokrome.com</a>
+      <div class="way"><b>Location</b>Dubai, UAE. Shoots across all seven emirates.</div>
+    </div>
+
+    <!-- ---------- PROJECT BRIEF FORM (script: js/contact.js) ---------- -->
+    <form id="brief" class="brief">
+      <h2 class="display">Short project brief</h2>
+      <label>Name <input name="name" required></label>
+      <label>Email <input type="email" name="email" required></label>
+      <label>Phone / WhatsApp <input name="phone"></label>
+      <label>Service
+        <select name="service">
+          <option>Event Media</option>
+          <option>Social Content</option>
+          <option>Corporate Media</option>
+          <option>Commercial Production</option>
+        </select>
+      </label>
+      <label>Tell us about your project <textarea name="brief" rows="5" required></textarea></label>
+      <button class="btn" type="submit">Send enquiry</button>
+    </form>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="logo"><img src="images/logo-white.png" alt="Monokrome Media"></div>
+    <ul>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="work.html">Projects</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <ul>
+      <li>Corporate</li>
+      <li>Events</li>
+      <li>Social Media</li>
+      <li>Commercials</li>
+    </ul>
+    <ul>
+      <li>Handheld Media</li>
+      <li>Aerial Media</li>
+      <li>Mobile Media</li>
+      <li>VFX &amp; CGI</li>
+    </ul>
+    <div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">IN</a></div>
+    <div class="small">Privacy Policy · © 2026 Monokrome. All Rights Reserved.</div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/common.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>
