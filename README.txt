@@ -12,8 +12,9 @@ FINDING PLACEHOLDERS
 FILES
   index.html     Home
   work.html      Our Work (filters + grid)
-  services.html  What We Do
   about.html     Who We Are
+  services.html  What We Do
+  drone.html     Drone Work (baseline page, edit the wording)
   contact.html   Start a Project
   project.html   Single project template (title comes from the link)
   css/style.css  All styling, numbered sections
