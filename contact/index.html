@@ -3,11 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Security policy (also sent as a header via the _headers file). Keep both in sync. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://media.mnkrm.com; media-src 'self' https://media.mnkrm.com; connect-src 'self'; frame-src https://challenges.cloudflare.com; form-action 'self'; base-uri 'none'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Start a Project | Monokrome Media</title>
   <link rel="icon" href="/images/logo-black.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,800;125,900&family=Space+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <!-- Cloudflare Turnstile (spam protection) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body class="taupe">
@@ -29,7 +34,7 @@
 
     <!-- ---------- HEADING ---------- -->
     <header class="page-head">
-      <h1 class="display" style="color: var(--mauve)">Let’s get to know<br>each other</h1>
+      <h1 class="display c-mauve">Let’s get to know<br>each other</h1>
     </header>
 
     <!-- ---------- WAYS TO REACH US (replace the fake number and email) ---------- -->
@@ -40,12 +45,13 @@
       <div class="way"><b>Location</b>Dubai, UAE. Shoots across all seven emirates.</div>
     </div>
 
-    <!-- ---------- PROJECT BRIEF FORM (script: js/contact.js) ---------- -->
+    <!-- ---------- PROJECT BRIEF FORM (script: js/contact.js, server: functions/api/contact.js) ---------- -->
     <form id="brief" class="brief">
       <h2 class="display">Short project brief</h2>
-      <label>Name <input name="name" required></label>
-      <label>Email <input type="email" name="email" required></label>
-      <label>Phone / WhatsApp <input name="phone"></label>
+
+      <label>Name <input name="name" maxlength="100" autocomplete="name" required></label>
+      <label>Email <input type="email" name="email" maxlength="150" autocomplete="email" required></label>
+      <label>Phone / WhatsApp <input name="phone" maxlength="40" autocomplete="tel"></label>
       <label>Service
         <select name="service">
           <option>Event Media</option>
@@ -55,8 +61,20 @@
           <option>Drone &amp; Aerial</option>
         </select>
       </label>
-      <label>Tell us about your project <textarea name="brief" rows="5" required></textarea></label>
-      <button class="btn" type="submit">Send enquiry</button>
+      <label>Tell us about your project <textarea name="brief" rows="5" maxlength="2000" required></textarea></label>
+
+      <!-- Honeypot: leave empty. Bots fill it in, people never see it. -->
+      <div class="hp" aria-hidden="true">
+        <label>Website <input name="website" tabindex="-1" autocomplete="off"></label>
+      </div>
+
+      <!-- Turnstile widget: replace YOUR_TURNSTILE_SITE_KEY with the site key from Cloudflare.
+           (The site key is public by design. Never put the SECRET key here.) -->
+      <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY"></div>
+
+      <p class="form-note">By sending this form you agree that we may use your details to reply to your enquiry. They are stored privately and never sold. See our <a href="/privacy/">Privacy Policy</a>.</p>
+      <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+      <button class="btn" id="sendBtn" type="submit">Send enquiry</button>
     </form>
 
   </main>
@@ -84,7 +102,7 @@
       <li>VFX &amp; CGI</li>
     </ul>
     <div class="social"><a href="#">IG</a><a href="#">FB</a><a href="#">IN</a></div>
-    <div class="small">Privacy Policy · © 2026 Monokrome. All Rights Reserved.</div>
+    <div class="small"><a href="/privacy/">Privacy Policy</a> · © 2026 Monokrome. All Rights Reserved.</div>
   </footer>
 
   <!-- ===== SCRIPTS ===== -->

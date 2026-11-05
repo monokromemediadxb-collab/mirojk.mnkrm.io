@@ -16,7 +16,9 @@
    13. CONTACT - cards + brief form
    14. PROJECT - single project page
    15. DRONE - aerial work page
-   16. Responsive (mobile)
+   16. LEGAL - privacy policy page
+   17. Helper classes (replace inline style="" so the security policy can block it)
+   18. Responsive (mobile)
    ========================================================================== */
 
 
@@ -212,6 +214,7 @@ nav a.active { background: var(--coral); color: #fff; }
 
 /* 6. SCROLL-REVEAL ANIMATION
    Add data-reveal="left | right | up" to any element. common.js adds .in
+   Optional stagger: add class delay-1, delay-2 or delay-3.
    ========================================================================== */
 [data-reveal] {
   opacity: 0;
@@ -222,6 +225,10 @@ nav a.active { background: var(--coral); color: #fff; }
 [data-reveal="right"] { transform: translateX(12vw); }
 [data-reveal="up"]    { transform: translateY(70px); }
 [data-reveal].in      { opacity: 1; transform: none; }
+
+.delay-1 { --d: .1s; }
+.delay-2 { --d: .2s; }
+.delay-3 { --d: .3s; }
 
 
 /* 7. FOOTER
@@ -243,6 +250,7 @@ footer a  { text-decoration: none; }
 
 .social { display: flex; gap: 14px; font-size: 14px; }
 .small  { grid-column: 1 / -1; margin-top: 30px; text-align: right; font-size: 10px; opacity: .6; }
+.small a { text-decoration: underline; }
 
 
 /* 8. HOME
@@ -673,6 +681,25 @@ html.snap-page { scroll-snap-type: y mandatory; }
   font-size: 13px;
 }
 .brief .btn { justify-self: start; }
+.brief .btn:disabled { opacity: .5; cursor: wait; }
+
+/* Honeypot: invisible to people, tempting to bots. Do not use display:none. */
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.cf-turnstile { margin: 4px 0; }
+.form-note    { max-width: 640px; font-size: 11px; opacity: .75; }
+.form-note a  { text-decoration: underline; }
+
+.form-status { min-height: 1.6em; font-size: 12px; }
+.form-status--success { color: #1f7a3d; }
+.form-status--error   { color: var(--cherry); }
+.form-status--pending { opacity: .7; }
 
 
 /* 14. PROJECT PAGE
@@ -750,7 +777,49 @@ html.snap-page { scroll-snap-type: y mandatory; }
 .drone-cta h2 { font-size: clamp(26px, 4vw, 60px); }
 
 
-/* 16. RESPONSIVE (phones and small tablets)
+/* 16. LEGAL PAGES (privacy policy)
+   ========================================================================== */
+.legal { max-width: 760px; font-size: 13px; line-height: 1.8; }
+.legal h2 {
+  margin: 44px 0 12px;
+  font-size: clamp(18px, 2vw, 26px);
+  color: var(--cherry);
+}
+.legal p,
+.legal ul { margin-bottom: 14px; }
+.legal ul { padding-left: 22px; }
+.legal li { margin-bottom: 6px; }
+.legal a  { text-decoration: underline; }
+.legal .updated { font-size: 11px; opacity: .7; }
+
+.legal-table {
+  width: 100%;
+  margin: 8px 0 18px;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.legal-table th,
+.legal-table td {
+  padding: 10px 12px;
+  border: 1px solid #66555555;
+  text-align: left;
+  vertical-align: top;
+}
+.legal-table th { background: var(--taupe); font-size: 11px; text-transform: uppercase; }
+
+
+/* 17. HELPER CLASSES
+   These replace style="..." attributes in the HTML. The site's security policy
+   (Content-Security-Policy) blocks inline styles, so never write style="..."
+   in the HTML: add a small class here instead.
+   ========================================================================== */
+.c-cherry { color: var(--cherry); }
+.c-slate  { color: var(--slate); }
+.c-mauve  { color: var(--mauve); }
+.mt-20    { margin-top: 20px; }
+
+
+/* 18. RESPONSIVE (phones and small tablets)
    ========================================================================== */
 @media (max-width: 800px) {
   nav { top: 14px; right: 10px; gap: 2px; padding: 6px 8px; }
@@ -779,4 +848,6 @@ html.snap-page { scroll-snap-type: y mandatory; }
   .b-left,
   .b-right { grid-column: 1; grid-row: auto; width: 100%; }
   .bespoke h2 { margin-right: 0; }
+
+  .legal-table { display: block; overflow-x: auto; }
 }

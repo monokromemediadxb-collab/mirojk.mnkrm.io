@@ -2,12 +2,17 @@
    WORK PAGE - category filters + "Load more"
    Each card has data-cat="Film | Photography | Social | VFX | Aerial".
    A link like /work/?f=Aerial opens the page pre-filtered.
+   The ?f= value is only ever compared to the known categories, never
+   written into the page.
    ========================================================================== */
 const cards   = [...document.querySelectorAll('.card--work')];
 const buttons = [...document.querySelectorAll('#filters .pill')];
 const loadMore = document.getElementById('loadMore');
+const knownFilters = buttons.map(b => b.dataset.filter);
 
 function applyFilter(category) {
+  if (!knownFilters.includes(category)) return;         // ignore anything unexpected
+
   buttons.forEach(b => b.classList.toggle('active', b.dataset.filter === category));
   cards.forEach(card =>
     card.classList.toggle('filtered-out', category !== 'All' && card.dataset.cat !== category));

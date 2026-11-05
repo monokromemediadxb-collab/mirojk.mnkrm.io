@@ -44,7 +44,7 @@ rotating.forEach(({ el, words }) => {
     el.style.opacity = 0;                               // fade out
     setTimeout(() => {
       index = (index + 1) % words.length;
-      el.textContent = words[index];
+      el.textContent = words[index];                    // textContent: never parsed as HTML
       el.style.opacity = 1;                             // fade in
     }, 350);
   }, 2600);
