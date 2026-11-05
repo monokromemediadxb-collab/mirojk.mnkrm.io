@@ -1,9 +1,28 @@
 /* ==========================================================================
    HOME PAGE
+   0. Smooth-scroll helper
    1. Rotating headline words
    2. Cinema dim + carousel movement on scroll
-   3. Hero "scroll down" bubble + auto-scroll
+   3. Hero "scroll down" bubble
+   4. Mouse-wheel / trackpad section snapping
+   (Touch swipes, keyboard and scrollbar snapping are pure CSS:
+    see css/style.css, section 8-0)
    ========================================================================== */
+
+
+/* 0. SMOOTH-SCROLL HELPER
+   Browsers can stall a smooth scroll while CSS snapping is on, so snapping is
+   switched off for the length of the animation and restored when it lands.
+   -------------------------------------------------------------------------- */
+let snapRestore;
+function smoothTo(top) {
+  const root = document.documentElement;
+  root.style.scrollSnapType = 'none';
+  scrollTo({ top, behavior: 'smooth' });
+
+  clearTimeout(snapRestore);
+  snapRestore = setTimeout(() => (root.style.scrollSnapType = ''), 900);
+}
 
 
 /* 1. ROTATING HEADLINE WORDS (click a word to lock it)
@@ -53,15 +72,15 @@ addEventListener('scroll', onScroll);
 onScroll();
 
 
-/* 3. HERO "SCROLL DOWN" BUBBLE + AUTO-SCROLL
-   The bubble trails the cursor. Clicking the hero, or scrolling down once
-   while at the top, jumps to the next section.
+/* 3. HERO "SCROLL DOWN" BUBBLE
+   The bubble trails the cursor (desktop only). Clicking the hero jumps to
+   the next section.
    -------------------------------------------------------------------------- */
 const hero   = document.getElementById('hero');
 const bubble = document.getElementById('scrollBtn');
 const nextSection = document.getElementById('break');
 
-const goNext = () => nextSection.scrollIntoView({ behavior: 'smooth' });
+const goNext = () => smoothTo(Math.round(nextSection.getBoundingClientRect().top + scrollY));
 
 let overNav = false;                                    // hide bubble over the nav
 let mouseX = innerWidth / 2, mouseY = innerHeight / 2;
@@ -85,14 +104,52 @@ followCursor();
 
 hero.addEventListener('click', goNext);
 
-let wheelLock = false;
+
+/* 4. MOUSE-WHEEL / TRACKPAD SECTION SNAPPING
+   CSS snapping handles touch screens and keyboards. Desktop wheels and
+   trackpads are less predictable, so this moves exactly one step per gesture:
+   hero -> break -> carousel -> what -> footer, and back up the same way.
+   Sections taller than the screen get two steps (their top, then their bottom)
+   so nothing is ever skipped.
+   -------------------------------------------------------------------------- */
+const snapSections = [...document.querySelectorAll('.snap-start')];
+
+function snapPoints() {
+  const maxScroll = document.documentElement.scrollHeight - innerHeight;
+  const points = [];
+
+  snapSections.forEach(el => {
+    const top = Math.round(el.getBoundingClientRect().top + scrollY);
+    points.push(top);
+    if (el.offsetHeight > innerHeight + 4) points.push(top + el.offsetHeight - innerHeight);
+  });
+
+  points.push(maxScroll);                               // bottom of the page (footer)
+  return [...new Set(points.map(p => Math.min(p, maxScroll)))].sort((a, b) => a - b);
+}
+
+let lastWheel = 0;
+let snapping  = false;
+
 addEventListener('wheel', e => {
-  if (scrollY < 10 && e.deltaY > 0) {
-    e.preventDefault();                                 // stop normal scroll fighting the smooth jump
-    if (!wheelLock) {
-      wheelLock = true;
-      goNext();
-      setTimeout(() => (wheelLock = false), 1400);
-    }
-  }
+  if (e.ctrlKey || Math.abs(e.deltaY) < 4) return;      // ignore pinch-zoom and tiny nudges
+
+  const now        = performance.now();
+  const newGesture = now - lastWheel > 120;             // a pause means a new swipe/tick
+  lastWheel = now;
+
+  e.preventDefault();
+  if (snapping || !newGesture) return;
+
+  const points = snapPoints();
+  const down   = e.deltaY > 0;
+  const target = down
+    ? points.find(p => p > scrollY + 3)
+    : [...points].reverse().find(p => p < scrollY - 3);
+
+  if (target === undefined) return;
+
+  snapping = true;
+  smoothTo(target);
+  setTimeout(() => (snapping = false), 800);
 }, { passive: false });

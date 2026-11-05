@@ -1,7 +1,7 @@
 /* ==========================================================================
    WORK PAGE - category filters + "Load more"
    Each card has data-cat="Film | Photography | Social | VFX | Aerial".
-   A link like work.html?f=Aerial opens the page pre-filtered.
+   A link like /work/?f=Aerial opens the page pre-filtered.
    ========================================================================== */
 const cards   = [...document.querySelectorAll('.card--work')];
 const buttons = [...document.querySelectorAll('#filters .pill')];

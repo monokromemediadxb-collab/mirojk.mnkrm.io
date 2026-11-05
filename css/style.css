@@ -8,7 +8,7 @@
    5.  Buttons & pills
    6.  Scroll-reveal animation
    7.  Footer
-   8.  HOME  - hero, "we break the limits", work carousel, clients, CTA
+   8.  HOME  - snapping, hero, "we break the limits", carousel, clients, CTA
    9.  Inner pages - shared layout
    10. WORK  - filters + project grid
    11. SERVICES - list + colour panel
@@ -35,10 +35,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: clip;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Space Mono', monospace;
@@ -251,12 +248,29 @@ footer a  { text-decoration: none; }
 /* 8. HOME
    ========================================================================== */
 
+/* 8-0. SECTION SNAPPING (Home only: <html class="snap-page">)
+   Each full-screen section locks into place as you swipe or scroll.
+   - 100svh = the visible screen height on phones (ignores the address bar);
+     100vh is the fallback for older browsers.
+   - "mandatory" always settles on a section. "stop: always" means one swipe
+     moves exactly one section, never skipping.
+   - Mouse wheels and trackpads are handled by js/home.js (section 4).
+   To turn snapping off, delete class="snap-page" from <html> in index.html. */
+html.snap-page { scroll-snap-type: y mandatory; }
+
+.snap-start {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.snap-end { scroll-snap-align: end; }
+
 /* 8a. Hero (sticky so the next section slides over it) */
 #hero {
   position: sticky;
   top: 0;
   z-index: 0;
   height: 100vh;
+  height: 100svh;
   overflow: hidden;
   cursor: pointer;
   background:
@@ -298,6 +312,7 @@ footer a  { text-decoration: none; }
   position: relative;
   z-index: 2;
   min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(5, auto);
@@ -329,26 +344,37 @@ footer a  { text-decoration: none; }
   line-height: 1.7;
 }
 
-/* 8d. "Get a taste of Monokrome" carousel */
-#work {
+/* 8d. Carousel + client logos share ONE snap screen:
+   the carousel fills the screen and the logo strip sits at the bottom. */
+.snap-group {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* "Get a taste of Monokrome" carousel */
+#work {
+  position: relative;
+  flex: 1;
   overflow: hidden;
-  padding: 14vh 4vw;
+  padding: 9vh 4vw;
   background: var(--black);
   text-align: center;
 }
 #work .title {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5vh;
+  margin-bottom: 3vh;
   padding: 0 1vw;
   font-size: clamp(18px, 2.2vw, 30px);
   opacity: 0;
   transition: opacity 1.2s;
 }
 #work .title.in      { opacity: 1; }
-#work .title--bottom { margin: 5vh 0; }
+#work .title--bottom { margin: 3vh 0; }
 
 .dim {                      /* cinema darkening overlay */
   position: absolute;
@@ -366,6 +392,10 @@ footer a  { text-decoration: none; }
   perspective: 1200px;
   transition: transform .15s;
 }
+
+/* On Home the carousel cards also shrink with screen HEIGHT so the whole
+   carousel + logo strip always fits one screen */
+.track .card { width: min(17vw, 26vh); }
 
 /* Polaroid-style project card (used on Home, Work and Drone) */
 .card {
@@ -385,8 +415,6 @@ footer a  { text-decoration: none; }
 
 /* 8e. Client logos strip */
 #clients {
-  position: relative;
-  z-index: 2;
   display: flex;
   align-items: center;
   gap: 60px;
@@ -399,6 +427,7 @@ footer a  { text-decoration: none; }
   position: relative;
   z-index: 2;
   min-height: 100vh;
+  min-height: 100svh;
   padding: 14vh 4vw;
   background: var(--ivory);
   color: var(--mauve);
@@ -729,8 +758,13 @@ footer a  { text-decoration: none; }
   .brand { top: 14px; left: 14px; }
   .brand img { height: 40px; }
 
+  /* Home "break the limits" screen: tighter so it fits short phones */
+  #break { padding: 11vh 6vw 5vh; gap: 1.5vh 0; }
+  #break .w { font-size: clamp(22px, 6.5vw, 40px); }
+  .copy { font-size: 11px; line-height: 1.55; }
+
   .track { overflow-x: auto; justify-content: flex-start; }
-  #clients { flex-wrap: wrap; }
+  #clients { flex-wrap: wrap; gap: 20px; padding: 24px 6vw; }
   footer { grid-template-columns: 1fr 1fr; }
 
   .grid { grid-template-columns: repeat(2, 1fr); }

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PROJECT PAGE - fills the title from the link, e.g. project.html?p=Soho+House
+   PROJECT PAGE - fills the title from the link, e.g. /project/?p=Soho+House
    ========================================================================== */
 const projectName = new URLSearchParams(location.search).get('p');
 if (projectName) {
